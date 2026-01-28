@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Our Journey</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+      background: #fff0f6;
+      color: #5a2a3c;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background: #ffccd6;
+      border-bottom: 2px solid #ff8fb3;
+    }
+
+    nav h1 {
+      margin: 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #5a2a3c;
+      font-weight: 500;
+      background: #fff;
+      padding: 8px 16px;
+      border-radius: 20px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 40px auto;
+      position: relative;
+    }
+
+    .timeline {
+      position: relative;
+      margin: 0;
+      padding: 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      width: 4px;
+      background: #ff8fb3;
+      top: 0;
+      bottom: 0;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .event {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+
+    .event:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+
+    .event:nth-child(even) {
+      left: 50%;
+      text-align: left;
+    }
+
+    .event img {
+      width: 150px;
+      border-radius: 15px;
+      margin-bottom: 10px;
+      box-shadow: 0 10px 25px rgba(178,58,100,0.2);
+    }
+
+    .event::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff8fb3;
+      border-radius: 50%;
+      top: 30px;
+      right: -10px;
+      z-index: 1;
+    }
+
+    .event:nth-child(even)::after {
+      left: -10px;
+      right: auto;
+    }
+
+    .event h3 {
+      margin: 10px 0;
+      font-size: 20px;
+    }
+
+    .event p {
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .event::before {
+      content: '';
+      position: absolute;
+      top: 35px;
+      width: 20px;
+      height: 2px;
+      background: #ff8fb3;
+    }
+
+    .event:nth-child(odd)::before {
+      right: -20px;
+    }
+
+    .event:nth-child(even)::before {
+      left: -20px;
+    }
+
+    @media (max-width: 768px) {
+      .event, .event:nth-child(even), .event:nth-child(odd) {
+        width: 100%;
+        left: 0 !important;
+        text-align: left;
+        padding: 20px 20px;
+      }
+      .timeline::before {
+        left: 20px;
+      }
+      .event::after {
+        left: 10px !important;
+      }
+      .event::before {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <h1>Our Journey</h1>
+  <a href="index.html">Home</a>
+</nav>
+
+<div class="container">
+  <div class="timeline">
+
+    <!-- Event 1 -->
+    <div class="event">
+      <img src="images/journey/journey1.png" alt="journey-1">
+      <h3>The Day We Met 💫</h3>
+      <p>
+        It started with a simple hello,  
+        but my heart somehow knew this was not ordinary.  
+        That moment quietly changed everything for me.
+      </p>
+    </div>
+
+    <!-- Event 2 -->
+    <div class="event">
+      <img src="images/journey/journey2.png" alt="journey-2">
+      <h3>Your First Smile 😊</h3>
+      <p>
+        That smile didn’t just reach my eyes,  
+        it reached straight into my heart.  
+        From there, I was already yours.
+      </p>
+    </div>
+
+    <!-- Event 3 -->
+    <div class="event">
+      <img src="images/journey/journey3.png" alt="journey-3">
+      <h3>Late Night Conversations 🌙</h3>
+      <p>
+        Nights became shorter and hearts grew closer.  
+        Talking to you felt effortless,  
+        like I had known you forever.
+      </p>
+    </div>
+
+    <!-- Event 4 -->
+    <div class="event">
+      <img src="images/journey/journey4.png" alt="journey-4">
+      <h3>First Adventure Together ✨</h3>
+      <p>
+        New places, new memories,  
+        but the best part was always you beside me.  
+        That’s when I knew — anywhere with you is home.
+      </p>
+    </div>
+
+    <!-- Event 5 -->
+    <div class="event">
+      <img src="images/journey/journey5.png" alt="journey-5">
+      <h3>Silly Laughs & Inside Jokes 😄</h3>
+      <p>
+        From laughing at nothing to understanding everything,  
+        our bond grew stronger in the simplest moments.  
+        Loving you became easy.
+      </p>
+    </div>
+
+    <!-- Event 6 -->
+    <div class="event">
+      <img src="images/journey/journey6.png" alt="journey-6">
+      <h3>Little Fights, Bigger Love ❤️</h3>
+      <p>
+        We didn’t always agree,  
+        but we always chose each other.  
+        And that choice made us stronger every time.
+      </p>
+    </div>
+
+    <!-- Event 7 -->
+    <div class="event">
+      <img src="images/journey/journey7.png" alt="journey-7">
+      <h3>Growing Together 🌱</h3>
+      <p>
+        We changed, we learned, we grew.  
+        Every version of me became better  
+        because you were part of my journey.
+      </p>
+    </div>
+
+    <!-- Event 8 -->
+    <div class="event">
+      <img src="images/journey/journey8.png" alt="journey-8">
+      <h3>Where We Are Now 💖</h3>
+      <p>
+        Today, you are not just part of my life,  
+        you are my comfort, my happiness, my peace.  
+        My world makes sense because of you.
+      </p>
+    </div>
+
+    <!-- Event 9 -->
+    <div class="event">
+      <img src="images/journey/journey9.png" alt="journey-9">
+      <h3>The Future I Dream Of 💍</h3>
+      <p>
+        Every tomorrow I imagine  
+        has you smiling beside me.  
+        That’s the only future I want.
+      </p>
+    </div>
+
+    <!-- Event 10 -->
+    <div class="event">
+      <img src="images/journey/journey10.png" alt="journey-10">
+      <h3>Forever With You ♾️</h3>
+      <p>
+        This journey doesn’t end here.  
+        It continues with love, laughter, and us —  
+        today, tomorrow, and forever.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

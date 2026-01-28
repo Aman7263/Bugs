@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        body{
+            overflow: hidden;
+            background-color: rgb(235, 194, 194);
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-1%);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        .heart {
+            font-size: 40px;
+            color: red;
+            position: absolute;
+            animation: fall 3s linear infinite;
+        }
+        #two{
+            margin-top: 1.5%;
+            background-color: rgb(7, 74, 52);
+            text-decoration: dotted;
+            margin-left: 7%;
+            width: 80%;
+            height: 15%;
+            font-size: smaller;
+            font-family:'Courier New', Courier, monospace;
+            color: beige;
+            border-radius: 2%;
+        }
+        .one{
+            display: flex;
+            justify-content: space-evenly;
+        }
+        h3{
+            font-size: x-large;
+            font-family:'Courier New', Courier, monospace;
+            color: rgb(42, 55, 156);
+        }
+    </style>
+<body>
+    <h3 style="text-align: center;color: rgb(234, 80, 151);font-size: x-large; font-family: 'Courier New', Courier, monospace;background-color: antiquewhite;"><b>LOVE YOU TOO Meri💕</b></h3>
+
+<h3 style="text-align: center;color: rgb(15, 103, 93);font-size: medium; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: antiquewhite;">Hume to pata tha aap Mohabbat kerti hai humse...💕 Per itna ye aaj pata chala hume ❤️<br>Lo ek aur Shayari ❤️ </h3>
+
+<!-- <h3 style="text-align: center;color: rgb(15, 103, 93);font-size: medium; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: antiquewhite;">Lo ek aur Shayari ❤️ </h3> -->
+<h3 style="text-align: center;color: rgb(15, 103, 93);font-size: larger; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: antiquewhite;"> <pre>Aoo kal kuch batana hai🥰
+    Kuch janana hai❤️ Kuch samajhna hai💕
+    Kere ke kuch baat jindagi ki 🥰
+    Jindagi hi samajhna hai🙈
+    Zindagi na sahi kuch lamhe hi sahi🤔
+    Tere sath kam se kam ye bitan hai💑
+    Ker ke dur duniya ke sare pahlu ko ❤️
+    Tere sath hi Khud ki hi duniya hi bnana hai💕
+    Aao kal kuch batana🫣 kuch Janana👀 kuch samajhna hai💕
+    Ker ke sath tujhe aapne🥰 ye duniya se tujhe chipana hai 🫣
+    Na dhund sake koi tujhe😘 itna mehfooz chipana hai💕 
+    Na ho sake mujhe tujhe khona ka daar💑 aaa kahi to dur tujhe le jata hun🤝 
+    Chal to tu mera haat paker ker 🤝Kasam khuda ka ye haat na kavi chorna hai 📑
+    Tu soch na sake tujhe itna mehfooz aur duniya se dur le Jana hai❤️
+    Chor logo ki baatein ko aa chal kahi dur chale Jana hai 😅
+    Tu soch na sake tujhe itna kuch batana hai🙈 Kuch janana hai Kuch samajhna hai💕
+    Rakh ke hatao me hath bhaut kuch batana hai 🤝
+    Bhaut kuch tere bare me janana 🫣bhaut apne bare me samjha hai 💑
+    Aao kal kuch batana hai💕
+    Kuch janana hai❤️
+    Kuch samajhna hai😘
+</pre></h3>
+
+<h3 style="text-align: center;color: rgb(15, 103, 93);font-size: medium; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: antiquewhite;"><b>Inhe sirf shayari mat samajhna Baki aap samajhdar to hai hin 💕</b></h3>
+<div class="one">
+<button id="two" onclick="Yes4()">❤️ Ye sun ker love you aur more ❤️</button>
+<button id="two" onclick="No()">💔Ye sun ker accha to laga But Not Love you 💔</button>
+</div>
+<br>
+
+<script>
+function No() {
+    var myWindow = window.open("D:/Bug/MultiplePages/Bug/No.html", "", "width=700,height=900");
+    console.log("No tab is opend..");
+}
+function Yes4() {
+          var myWindow = window.open("D:/Bug/MultiplePages/Bug/Yes4.html", "", "width=700,height=900");
+    console.log("Yes 4 tab is opend..");
+}
+
+   
+    function getRandomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Create and position falling heart elements
+    for (let i = 0; i < 50; i++) { // Change the number to control how many hearts you want
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '&hearts;'
+        heart.style.top = getRandomNumber(-150, 300) + 'px';
+        heart.style.left = getRandomNumber(0, window.innerWidth - 30) + 'px';
+        document.body.appendChild(heart);
+    }
+
+</script>
+</body>
+</html>

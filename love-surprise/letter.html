@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Letter</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+    .tab-btn {
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      background: #ffd6e3;
+      color: #5a2a3c;
+      font-weight: 500;
+    }
+    .tab-btn.active {
+      background: #ff8fb3;
+      color: white;
+    }
+    .letter {
+      display: none;
+    }
+    .letter.active {
+      display: block;
+    }
+    .letter p {
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <h1>For You</h1>
+  <a href="index.html">Home</a>
+</nav>
+
+<div class="container">
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="openLetter('english', this)">English</button>
+    <button class="tab-btn" onclick="openLetter('hindi', this)">Hindi</button>
+    <button class="tab-btn" onclick="openLetter('sanskrit', this)">Sanskrit</button>
+  </div>
+
+  <!-- ENGLISH -->
+  <div id="english" class="letter active">
+    <h3 style="font-family:'Playfair Display', serif; margin-bottom:20px;">
+      My Love ❤️
+    </h3>
+
+    <p>
+      I don’t really know where to start, because whenever I think about you,
+      my heart gets a little too full and my words start running faster than my thoughts.
+    </p>
+
+    <p>
+      Somewhere between our first conversation and all those endless talks,
+      you quietly became my favorite person.
+      I didn’t even realize when “you” turned into my comfort,
+      my happiness, and my safe place.
+    </p>
+
+    <p>
+      You are the reason my bad days don’t feel so heavy,
+      and my good days feel even better.
+      You somehow manage to make me laugh when I don’t want to smile,
+      and calm me down when my mind refuses to slow down.
+      (Honestly, I still don’t know how you do that.)
+    </p>
+
+    <p>
+      I love how we can be silly together,
+      how small moments with you turn into memories,
+      and how even silence feels peaceful when it’s with you.
+      From late night talks to random laughs,
+      from little fights to even bigger love —
+      every part of us feels real and beautiful.
+    </p>
+
+    <p>
+      You are not just someone I love,
+      you are someone I choose.
+      Every single day.
+    </p>
+
+    <p>
+      If life ever feels confusing or overwhelming,
+      I want you to remember this:
+      you are deeply loved,
+      you matter more than you know,
+      and you will always have me —
+      cheering for you, standing with you, annoying you,
+      and loving you endlessly.
+    </p>
+
+    <p>
+      You are my today,
+      my tomorrow,
+      my favorite thought,
+      and my biggest blessing.
+      In short… you are my life,
+      and I wouldn’t want it any other way.
+    </p>
+
+    <p>
+      Forever yours,<br>❤️
+    </p>
+  </div>
+
+  <!-- HINDI -->
+  <div id="hindi" class="letter">
+    <h3 style="font-family:'Playfair Display', serif;">Meri Jaan ❤️</h3>
+
+    <p>
+      Tum meri zindagi ka woh hissa ho jo bina bole sab kuch keh jaata hai.
+      Tumhara hona hi kaafi hota hai cheezon ko theek karne ke liye.
+    </p>
+
+    <p>
+      Kahin hamari pehli baat aur un lambe conversations ke beech,
+      tum meri aadat ban gayi.
+      Dheere-dheere, bina shor ke,
+      tum meri sukoon aur meri sabse safe jagah ban gayi.
+    </p>
+
+    <p>
+      Tum mere bure din ko halka bana deti ho
+      aur mere ache din ko aur khoobsurat.
+      Tumhari hasi meri favorite awaaz hai,
+      aur tumhara saath meri sabse badi taqat.
+    </p>
+
+    <p>
+      Mujhe woh sab pasand hai jo hum saath karte hain —
+      bina wajah hansna,
+      late night baatein,
+      choti si nok-jhok,
+      aur phir ek dusre ko aur zyada samajhna.
+    </p>
+
+    <p>
+      Tum sirf meri pasand nahi ho,
+      tum meri choice ho.
+      Har din,
+      har haal mein.
+    </p>
+
+    <p>
+      Agar kabhi zindagi bhaari lage,
+      toh bas itna yaad rakhna —
+      tum akeli nahi ho.
+      Main hamesha tumhare saath hoon,
+      pyaar karne ke liye,
+      support karne ke liye,
+      aur thoda sa tang karne ke liye bhi.
+    </p>
+
+    <p>
+      Tum meri aaj ho,
+      tum meri kal ho,
+      aur tum hi meri poori duniya ho.
+    </p>
+  </div>
+
+  <!-- SANSKRIT -->
+  <div id="sanskrit" class="letter">
+    <h3 style="font-family:'Playfair Display', serif;">प्रियसि ❤️</h3>
+
+    <p>
+      त्वं मम जीवनस्य सारः असि।
+      तव स्मरणे एव मम हृदयम् शान्तिं लभते।
+    </p>
+
+    <p>
+      यदा त्वं समीपे भवसि,
+      तदा कालः अपि स्थिरः इव दृश्यते।
+      तव सहवासः मम आत्मनः विश्रान्तिः।
+    </p>
+
+    <p>
+      न केवलं प्रेम,
+      अपि तु विश्वासः,
+      स्नेहः,
+      च नित्यं वर्धते।
+    </p>
+
+    <p>
+      जीवनपथे यावत् अहं गच्छामि,
+      तावत् त्वमेव मम पन्थाः।
+      त्वं मम धैर्यम्,
+      त्वं मम प्रेरणा।
+    </p>
+
+    <p>
+      अद्य,
+      श्वः,
+      सर्वदा च —
+      त्वमेव मम हृदयस्थिता।
+    </p>
+  </div>
+
+</div>
+
+<script>
+  function openLetter(id, btn) {
+    document.querySelectorAll('.letter').forEach(l => l.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+
+</body>
+</html>

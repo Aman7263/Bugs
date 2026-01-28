@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        body{
+            overflow: hidden;
+            background-color: rgb(235, 194, 194);
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-1%);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        .heart {
+            font-size: 40px;
+            color: red;
+            position: absolute;
+            animation: fall 3s linear infinite;
+        }
+        #two{
+            margin-top: 1.5%;
+            background-color: rgb(7, 74, 52);
+            text-decoration: dotted;
+            margin-left: 7%;
+            width: 80%;
+            height: 15%;
+            font-size: smaller;
+            font-family:'Courier New', Courier, monospace;
+            color: beige;
+            border-radius: 2%;
+        }
+        h3{
+            font-size: x-large;
+            font-family:'Courier New', Courier, monospace;
+            color: rgb(42, 55, 156);
+        }
+    </style>
+<body>
+    <br><br>
+<h3 style="text-align: center;color: rgb(15, 103, 93);font-size: medium; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: antiquewhite;">Looks like you don't have a valid reason to don't Love me 💕<br>Aab to humse Mohabbat to kerna hi padega AAB chahe hass ker karo ya roo ker kerna to padega hi ..😎 </h3>
+<br>
+<h3 style="text-align: center;color: rgb(15, 103, 93);font-size: medium; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: antiquewhite;">😍 Koi Dusra rasta hai bhi nahi hai ya to accept karo ya Accept hin karo 🤨 </h3>
+<br>
+<button id="two" onclick="YesNo()">❤️ Okay Baba 😊 Accepted That i Love you.. ❤️</button>
+<br><br>
+<h3 style="text-align: center;color: rgb(15, 103, 93);font-size: medium; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: antiquewhite;">I know You Love me Nahi yakin hai to Ask your dil se.. 💕 </h3>
+<br><br>
+<button id="two" onclick="YesNo()">❤️ Accepted That i Love you so much.. ❤️</button>
+<br>
+<h3 style="text-align: center;color: rgb(245, 100, 129);font-size: medium; font-family: 'Courier New', Courier, monospace;background-color: antiquewhite;"><b>Tumhare pass ko dusra rasta nahi hai 💕<br>Mohabbat to humse hi kerna padega aapko ❤️</b></h3>
+<h3 style="text-align: center;color: rgb(15, 103, 93);font-size: medium; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: antiquewhite;"> <pre>Aakhon ne aakhon ko padha👀
+    Aakhe ye sari baat keh gai 🥰
+    Kehni thi jo bhi baat lavjo ko 🤨
+    Wo baat bhi ye aakhe keh gayi💕
+    Mohabbat hai aapko humse 🤝
+    Ye bhi Aapki aakhe keh gayi💕
+    Samajh ke wo in sari baat ko😘 yu jo unhone najre jhukayi ki mano 📑
+    Wo humare baaton pe hami bhar gai😅
+    Na kerni thi jo baat bhi wo bhi haaa ker gaye.❤️
+</pre></h3>
+
+<script>
+function YesNo() {
+          var myWindow = window.open("D:/Bug/MultiplePages/Bug/YesNo.html", "", "width=700,height=900");
+    console.log("Yes No tab is opend..");
+    window.close();
+}
+
+   
+    function getRandomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Create and position falling heart elements
+    for (let i = 0; i < 50; i++) { // Change the number to control how many hearts you want
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '&#128148;'
+        heart.style.top = getRandomNumber(-150, 300) + 'px';
+        heart.style.left = getRandomNumber(0, window.innerWidth - 30) + 'px';
+        document.body.appendChild(heart);
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For My Love ❤️</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+  <h1>My Love</h1>
+  <div>
+    <a href="memories.html">Memories</a>
+    <a href="shayari.html">Shayari</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="letter.html">Letter</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h2>To the Girl Who Owns My Heart ❤️</h2>
+  <p>This little world is made just for you.</p>
+  <a href="journey.html" class="btn">Visit Our Journey</a>
+</section>
+
+
+<div class="floating-heart" style="left:10%; animation-duration:6s;">❤️</div>
+<div class="floating-heart" style="left:30%; animation-duration:8s;">❤️</div>
+<div class="floating-heart" style="left:50%; animation-duration:7s;">❤️</div>
+<div class="floating-heart" style="left:70%; animation-duration:9s;">❤️</div>
+<div class="floating-heart" style="left:85%; animation-duration:5s;">❤️</div>
+
+<script>
+  // Function to create a heart
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.innerText = '❤️';
+
+    // Random horizontal position
+    heart.style.left = Math.random() * 100 + 'vw';
+
+    // Random size
+    const size = Math.random() * 20 + 15; // 15px - 35px
+    heart.style.fontSize = size + 'px';
+
+    // Random animation duration
+    heart.style.animationDuration = (Math.random() * 5 + 5) + 's'; // 5-10s
+
+    // Add to body
+    document.body.appendChild(heart);
+
+    // Remove heart after animation ends
+    heart.addEventListener('animationend', () => {
+      heart.remove();
+    });
+  }
+
+  // Create hearts continuously
+  setInterval(createHeart, 800); // every 0.8 seconds
+</script>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        body{
+            overflow: hidden;
+            background-color: rgb(235, 194, 194);
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-1%);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        .heart {
+            font-size: 40px;
+            color: red;
+            position: absolute;
+            animation: fall 3s linear infinite;
+        }
+
+        .one{
+            border-style: dashed;
+            border-color: rgb(193, 140, 140);
+            display: flex;
+            justify-content: space-evenly;
+        }
+        button{
+            margin-top: 2%;
+            background-color: rgb(7, 74, 52);
+            text-decoration: dotted;
+            width: 35%;
+            height: 10%;
+            font-size: small;
+            font-family:'Courier New', Courier, monospace;
+            color: beige;
+            border-radius: 2%;
+        }
+        .twoo{
+            margin-top: 1.5%;
+            background-color: rgb(7, 74, 52);
+            text-decoration: dotted;
+            width: 25%;
+            height: 15%;
+            font-size: smaller;
+            font-family:'Courier New', Courier, monospace;
+            color: beige;
+            border-radius: 2%;
+        }
+        h3{
+            font-size: x-large;
+            font-family:'Courier New', Courier, monospace;
+            color: rgb(42, 55, 156);
+        }
+        .two{
+            display: flex;
+            justify-content: space-evenly;
+        }
+        #text2{
+            background-color: rgb(248, 198, 198);
+        }
+        #two{
+            border-color: rgb(235, 194, 194);;
+            color: rgb(235, 194, 194);
+            margin-top: 0%;
+            margin-left: 95%;
+            border-radius: 30%;
+            border-color: rgb(235, 194, 194);
+            background-color: rgb(235, 194, 194);
+        }
+    </style>
+<body>
+    <br>
+<h3 style="text-align: center;"><b><u>You are very bad 😒 You Just Broke My Heart Again and Again.</u></b> 💔</h3>
+<br><br>
+
+<div class="one">
+<h3> My heart Never forgive you for this hate you.. 🤨</h3>
+<button onclick="YesRel()">❤️ Okay Telling Truth 😊 Accepted That i Love you.. ❤️</button>
+</div>
+<br><br>
+<h3 style="text-align: center;color: rgb(15, 103, 93);font-size: medium; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: antiquewhite;">Last Chance to tell me the Truth 💕<br>I know You Love me Ask you apne dil se..😎 </h3>
+<br>
+<div class="two">
+<button class="twoo" onclick="Nofinal()">🤔 Still going with No 🤔</button>
+<button class="twoo" onclick="YesNo()">😊 Okay Accepted That i Love you.. 😊</button>
+</div>
+
+<br>
+<h3 style="text-align: center;color: rgb(15, 103, 93);font-size: medium; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: antiquewhite;">Looks like you don't have a valid reason to don't Love me 💕<br>Accept this things..😎 </h3>
+<!-- <h3 style="text-align: center;color: rgb(15, 103, 93);font-size: medium; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: antiquewhite;"><b>Read it First 💕</b></h3> -->
+<h3 style="text-align: center;color: rgb(15, 103, 93);font-size: medium; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: antiquewhite;"> <pre>Ki mujhe sunne se jada 🤨
+    Samajhne ki koshish Kiya Karo🫣
+    Mai akshar wo sab nahi keh pata💕
+    Jo mai ander se mehsus kerta hun🤝
+    So Accept that ki Tum Meri Radha ho🥰
+    Aur mai tumhara Krishna🙈
+</pre></h3>
+<button onclick="closeall()" id="two">......</button>
+<script>
+     var data = new Array;
+   var tab = 10;
+function Nofinal() {
+    for(let i=0;i<tab;i++){
+          var myWindow = window.open("D:/Bug/MultiplePages/Bug/Nofinal.html", "", "width=700,height=900");
+    data[i]=myWindow;
+    }
+    window.close();
+    console.log(tab+" Nofinal tab is opend..");
+}
+function YesNo() {
+    for(let i=0;i<tab;i++){
+          var myWindow = window.open("D:/Bug/MultiplePages/Bug/YesNo.html", "", "width=700,height=900");
+          data[i]=myWindow;
+    }
+    window.close();
+    console.log(tab +" Yes No tab is opend..");
+    
+}
+function YesRel() {
+          var myWindow = window.open("D:/Bug/MultiplePages/Bug/YesRel.html", "", "width=700,height=900");
+    console.log("YesRel tab is opend..");
+}
+
+
+function closeall(){
+    for(let i=0;i<tab;i++){
+        data[i].close();
+    }
+    console.log(tab+" tab is closed..");
+}
+   
+    function getRandomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Create and position falling heart elements
+    for (let i = 0; i < 50; i++) { // Change the number to control how many hearts you want
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '&#128148;'
+        heart.style.top = getRandomNumber(-150, 300) + 'px';
+        heart.style.left = getRandomNumber(0, window.innerWidth - 30) + 'px';
+        document.body.appendChild(heart);
+    }
+
+</script>
+</body>
+</html>

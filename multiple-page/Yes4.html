@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        body{
+            overflow: hidden;
+            background-color: rgb(235, 194, 194);
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-1%);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        .heart {
+            font-size: 40px;
+            color: red;
+            position: absolute;
+            animation: fall 3s linear infinite;
+        }
+        #two{
+            margin-top: 1.5%;
+            background-color: rgb(7, 74, 52);
+            text-decoration: dotted;
+            margin-left: 7%;
+            width: 80%;
+            height: 15%;
+            font-size: smaller;
+            font-family:'Courier New', Courier, monospace;
+            color: beige;
+            border-radius: 2%;
+        }
+        .one{
+            display: flex;
+            justify-content: space-evenly;
+        }
+        h3{
+            font-size: x-large;
+            font-family:'Courier New', Courier, monospace;
+            color: rgb(42, 55, 156);
+        }
+        #twoo{
+            border-color: rgb(235, 194, 194);;
+            color: rgb(235, 194, 194);
+            margin-top: 2%;
+            margin-left: 95%;
+            border-radius: 30%;
+            border-color: rgb(235, 194, 194);
+            background-color: rgb(235, 194, 194);
+        }
+    </style>
+<body>
+    <h3 style="text-align: center;color: rgb(234, 80, 151);font-size: x-large; font-family: 'Courier New', Courier, monospace;background-color: antiquewhite;"><b>LOVE YOU TOO Meri Radhe💕</b></h3>
+
+<h3 style="text-align: center;color: rgb(15, 103, 93);font-size: medium; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: antiquewhite;">Aab Humse itni Mohabbat ho to Hume..💕 apna Krishna bana hi lo ❤️<br>Lo iss baat pe ek Shayari ❤️ </h3>
+
+<!-- <h3 style="text-align: center;color: rgb(15, 103, 93);font-size: medium; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: antiquewhite;">Lo ek aur Shayari ❤️ </h3> -->
+<h3 style="text-align: center;color: rgb(15, 103, 93);font-size: larger; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: antiquewhite;"> <pre>Aao ek khel khelte hain💕
+    Choro naye khel hum Purne khel khelte hain🙈
+    Tum Bano Radha hum tumhare Krishna bante hain💕
+    Lad ke tumse tumhi pe Jaan dete hain 🫣
+    Aaye jo aanch tumpe krodh me Sara sansar jala dete hain👀
+    Ho jo dukh tumhe Bina bolo hum samajh jate hain💑
+    Gam bhi hum khud baat lete hain 🤝
+    Aao ek khel khelte hain❤️
+    Lad ke tumse hume Anand aata hai 😅
+    Sata ker tumhe Hume tumpe Payar aata hai🙈
+    Jatati ho jab hak humpe tum kya kahe hum🥰
+    humare dil ko Aaram aata hai ❤️
+    Bechain dil ko Aaram aata hai 💕
+    Aao ek khel khelte hain😘
+    Tum Bano Radha hum tumhare Krishna bante hain🫣
+    Kere ke sari gopion ko apne se dur 📑
+    hum tumse ek Sangam kerte hain.💕
+</pre></h3>
+
+<h3 style="text-align: center;color: rgb(15, 103, 93);font-size: medium; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: antiquewhite;"><b>Inhe sirf shayari mat samajhna Baki aap samajhdar to hai hin 💕</b></h3>
+<h3 style="text-align: center;color: rgb(243, 79, 155);font-size: medium; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: antiquewhite;"><b>Aab to hume apna Krishna bana lo Radhe..💕</b></h3>
+
+<div class="one">
+<button id="two" onclick="YesNO()">❤️ Ye sun ker love you aur more ❤️</button>
+<button id="two" onclick="No()">💔Ye sun ker accha to laga But Not Love you 💔</button>
+</div>
+<button onclick="closeall()" id="twoo">......</button>
+<br>
+
+<script>
+    var data = new Array;
+   var tab = 10;
+function YesNO() {
+    for(let i=0;i<tab;i++){
+          var myWindow = window.open("D:/Bug/MultiplePages/Bug/YesNO.html", "", "width=700,height=900");
+    data[i]=myWindow;
+    }
+    console.log("Yes No tab is opend..");
+}
+function No() {
+    var myWindow = window.open("D:/Bug/MultiplePages/Bug/No.html", "", "width=700,height=900");
+    console.log("No tab is opend..");
+}
+function closeall(){
+    for(let i=0;i<tab;i++){
+        data[i].close();
+    }
+    console.log(tab+" tab is closed..");
+}
+   
+    function getRandomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Create and position falling heart elements
+    for (let i = 0; i < 50; i++) { // Change the number to control how many hearts you want
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '&hearts;'
+        heart.style.top = getRandomNumber(-150, 300) + 'px';
+        heart.style.left = getRandomNumber(0, window.innerWidth - 30) + 'px';
+        document.body.appendChild(heart);
+    }
+
+</script>
+</body>
+</html>
