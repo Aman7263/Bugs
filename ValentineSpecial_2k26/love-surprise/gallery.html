@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Our Gallery ❤️</title>
+
+<style>
+/* ================= BASE ================= */
+body {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  background: #fff0f6;
+  color: #5a2a3c;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: #ffccd6;
+  border-bottom: 2px solid #ff8fb3;
+}
+
+nav a {
+  text-decoration: none;
+  color: #5a2a3c;
+  background: #fff;
+  padding: 8px 18px;
+  border-radius: 20px;
+}
+
+.gallery {
+  width: 95%;
+  max-width: 1400px;
+  margin: 40px auto;
+}
+
+/* ================= YEAR ================= */
+.year-title {
+  text-align: center;
+  font-size: 30px;
+  margin: 60px 0 30px;
+  color: #8a4b65;
+}
+
+/* ================= GRID ================= */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+/* ================= MONTH CARD ================= */
+.month {
+  background: #fff;
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(178,58,100,0.18);
+}
+
+.month-header .place {
+  font-size: 20px;
+  font-weight: bold;
+  color: #8a4b65;
+  margin-bottom: 12px;
+}
+
+/* ================= SLIDER ================= */
+.slider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.track {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.track img {
+  flex: 0 0 50%;              /* ✅ TWO IMAGES PER VIEW */
+  max-width: 50%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 16px;
+  scroll-snap-align: start;
+  box-shadow: 0 8px 20px rgba(178,58,100,0.25);
+  padding-right: 12px;
+}
+
+/* ================= ARROWS ================= */
+.nav {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #ff8fb3;
+  cursor: pointer;
+}
+
+.nav:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .track img {
+    height: 220px;
+    flex: 0 0 50%;  /* still two images */
+    max-width: 50%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <h1>Our Gallery ❤️</h1>
+  <a href="index.html">Home</a>
+</nav>
+
+<div class="gallery" id="gallery"></div>
+
+<script>
+/* ================= CONFIG ================= */
+const TOTAL_MEMORIES = 37;
+const START_MONTH_INDEX = 1; // February
+
+const MONTHS = [
+  "January","February","March","April","May","June",
+  "July","August","September","October","November","December"
+];
+
+/* ========================================= */
+
+const gallery = document.getElementById("gallery");
+let currentYearIndex = -1;
+let currentGrid;
+
+/* ================= BUILD ================= */
+for (let m = 1; m <= TOTAL_MEMORIES; m++) {
+  const yearIndex = Math.floor((m - 1) / 12);
+
+  if (yearIndex !== currentYearIndex) {
+    currentYearIndex = yearIndex;
+
+    const yearTitle = document.createElement("div");
+    yearTitle.className = "year-title";
+    yearTitle.textContent = `Year ${numberToWord(yearIndex + 1)} ❤️`;
+    gallery.appendChild(yearTitle);
+
+    currentGrid = document.createElement("div");
+    currentGrid.className = "grid";
+    gallery.appendChild(currentGrid);
+  }
+
+  const monthIndex = (START_MONTH_INDEX + (m - 1)) % 12;
+  const monthName = MONTHS[monthIndex];
+
+  const month = document.createElement("div");
+  month.className = "month";
+
+  month.innerHTML = `
+    <div class="month-header">
+      <div class="place">${monthName} Memories</div>
+    </div>
+
+    <div class="slider">
+      <button class="nav left">❮</button>
+      <div class="track"></div>
+      <button class="nav right">❯</button>
+    </div>
+  `;
+
+  currentGrid.appendChild(month);
+
+  const track = month.querySelector(".track");
+  const leftBtn = month.querySelector(".left");
+  const rightBtn = month.querySelector(".right");
+
+  loadImages(track, m, leftBtn, rightBtn);
+
+  leftBtn.onclick = () => {
+    track.scrollBy({ left: -track.clientWidth, behavior: "smooth" });
+    setTimeout(() => updateButtons(track), 300);
+  };
+
+  rightBtn.onclick = () => {
+    track.scrollBy({ left: track.clientWidth, behavior: "smooth" });
+    setTimeout(() => updateButtons(track), 300);
+  };
+}
+
+/* ================= IMAGE LOADER ================= */
+function loadImages(track, memoryNo, leftBtn, rightBtn) {
+  let index = 0;
+
+  function tryLoad() {
+    const file =
+      index === 0
+        ? `memory${memoryNo}.img`
+        : `memory${memoryNo}.${index}.img`;
+
+    const img = new Image();
+
+    img.onload = () => {
+      track.appendChild(img);
+      index++;
+      tryLoad();
+      updateButtons(track, leftBtn, rightBtn);
+    };
+
+    img.onerror = () => {
+      updateButtons(track, leftBtn, rightBtn);
+    };
+
+    img.src = `images/gallery/${file}`;
+  }
+
+  tryLoad();
+}
+
+/* ================= NAV STATE ================= */
+function updateButtons(track) {
+  const slider = track.parentElement;
+  const left = slider.querySelector(".left");
+  const right = slider.querySelector(".right");
+
+  left.disabled = track.scrollLeft <= 0;
+  right.disabled = Math.ceil(track.scrollLeft + track.clientWidth) >= track.scrollWidth;
+}
+
+/* ================= HELPERS ================= */
+function numberToWord(num) {
+  const words = [
+    "One","Two","Three","Four","Five",
+    "Six","Seven","Eight","Nine","Ten"
+  ];
+  return words[num - 1] || num;
+}
+</script>
+
+</body>
+</html>
