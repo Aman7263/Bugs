@@ -25,3 +25,4 @@ function go(page) {
 function valentineSuprise(){
   window.location.href = "../../love-surprise/index.html";
 }
+

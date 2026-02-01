@@ -112,6 +112,20 @@
     <a href="../special/index.html" class="btn">Home Page</a>
   </section>
 
+ <div class="love-message-box">
+  <p class="message-title">💌 Want to say something?</p>
+
+  <textarea
+    class="love-input"
+    placeholder="Write anything from your heart…"></textarea>
+
+  <button class="send-love-btn"
+          onclick="sendLoveMessage('Our Love Journey 💙', this)">
+    💖 Send this to me
+  </button>
+</div>
+
+
 <!-- ✅ Surprise section (checkbox gated) -->
 <div class="surprise-container">
 
@@ -126,15 +140,18 @@
     <img src="images/surprise-box.jpg" alt="Surprise" />
     <span class="surprise-text">Tap for a Surprise 💝</span>
   </button>
-
 </div>
 
+</div>
 
   <div class="floating-heart" style="left:10%; animation-duration:6s;">❤️</div>
   <div class="floating-heart" style="left:30%; animation-duration:8s;">❤️</div>
   <div class="floating-heart" style="left:50%; animation-duration:7s;">❤️</div>
   <div class="floating-heart" style="left:70%; animation-duration:9s;">❤️</div>
   <div class="floating-heart" style="left:85%; animation-duration:5s;">❤️</div>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="email.js"></script>
 
   <script>
     function openSurprise() {

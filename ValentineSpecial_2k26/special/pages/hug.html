@@ -28,9 +28,25 @@
     </div>
   </div>
 
+<div class="love-message-box">
+  <p class="message-title">💌 Want to say something?</p>
+
+  <textarea
+    class="love-input"
+    placeholder="Write anything from your heart…"></textarea>
+
+  <button class="send-love-btn"
+          onclick="sendLoveMessage('Hug Day 🤗', this)">
+    💖 Send this to me
+  </button>
+</div>
+
 </div>
 
 <button onclick="history.back()">⬅ Back</button>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="email.js"></script>
 
 </body>
 </html>
