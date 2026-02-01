@@ -1,6 +1,6 @@
 // ===== TEST MODE =====
-// const today = new Date();   // REAL DATE
-const today = new Date("2026-02-16"); // change for testing
+const today = new Date();   // REAL DATE
+// const today = new Date("2026-02-16"); // change for testing
 // =====================
 
 const day = today.getDate();
