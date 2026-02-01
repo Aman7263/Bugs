@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Generator</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<a href="../index.html">⬅ Back to Home</a>
+
+<h1>Word Combination Generator</h1>
+
+<div class="container">
+  <label for="username">Enter Username:</label>
+  <input type="text" id="username">
+
+  <label for="length">Length of Word:</label>
+  <input type="number" id="length" min="1">
+
+  <label><input type="checkbox" id="useLowercase"> Include lowercase letters</label>
+  <label><input type="checkbox" id="useUppercase"> Include uppercase letters</label>
+  <label><input type="checkbox" id="useNumbers"> Include numbers</label>
+  <label><input type="checkbox" id="useSpecial"> Include special characters</label>
+
+  <label id="specialCharsLabel" class="hidden">Custom special characters:</label>
+  <input type="text" id="specialChars" class="hidden">
+
+  <label id="numSpecialCharsLabel" class="hidden">Number of special characters:</label>
+  <input type="number" id="numSpecialChars" class="hidden">
+
+  <label id="numDigitsLabel" class="hidden">Number of digits:</label>
+  <input type="number" id="numDigits" class="hidden">
+
+  <label for="firstPart">Known First Part:</label>
+  <input type="text" id="firstPart">
+
+  <label for="lastPart">Known Last Part:</label>
+  <input type="text" id="lastPart">
+
+  <button id="generateBtn">Generate Combinations</button>
+
+  <div id="totalCombinations"></div>
+  <div class="output" id="output"></div>
+</div>
+
+<script src="../js/word.js"></script>
+</body>
+</html>
