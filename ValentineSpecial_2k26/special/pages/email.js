@@ -21,6 +21,7 @@ function sendLoveMessage(pageName, button) {
     "service_s5vx7yl",
     "template_fq9lhw7",
     {
+      project: "ValentineSpecial_2k26 -- 🤍", // 👈 add this
       page: pageName,
       message: message,
       date: new Date().toLocaleDateString(),

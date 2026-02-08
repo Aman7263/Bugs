@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Office Attendance</title>
 
-<!-- ✅ Correct EmailJS SDK -->
+<!-- ✅ EmailJS SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 <style>
@@ -63,10 +63,6 @@ h2 {
     transition: 0.2s;
 }
 
-.employees input {
-    margin-right: 6px;
-}
-
 .employees label:hover {
     background: #e6ecff;
 }
@@ -112,7 +108,7 @@ button:hover {
 
 <div class="card">
     <h2>Attendance Confirmation</h2>
-    <div class="sub">Reached office at or before 9:30 AM</div>
+    <div class="sub">Office arrival confirmation</div>
 
     <div class="employees">
         <label><input type="checkbox" value="Sonal"> Sonal</label>
@@ -131,8 +127,8 @@ button:hover {
     </div>
 
     <div class="field">
-        <label>Arrival Time (≤ 9:30 AM)</label>
-        <input type="time" id="time" max="09:30" value="09:30">
+        <label>Arrival Time</label>
+        <input type="time" id="time" required>
     </div>
 
     <div class="field">
@@ -141,18 +137,16 @@ button:hover {
     </div>
 
     <button onclick="sendMail()">Send Attendance</button>
-
-    <button onclick="window.location.href='../index.html'"> ✨ ⬅️ Exit ✨ </button>
-
+    <button onclick="window.location.href='../index.html'">✨ ⬅️ Exit ✨</button>
 </div>
 
 <script>
-/* ✅ Initialize EmailJS safely */
+/* ✅ Initialize EmailJS */
 (function () {
     emailjs.init("FhYEqstyGvtwNTCP6"); // Public Key
 })();
 
-/* Set today's date */
+/* Set today's date automatically */
 document.getElementById("date").valueAsDate = new Date();
 
 function sendMail() {
@@ -165,11 +159,8 @@ function sendMail() {
         return;
     }
 
-    const limit = new Date("1970-01-01T09:30:00");
-    const selected = new Date(`1970-01-01T${time}:00`);
-
-    if (selected > limit) {
-        alert("❌ Time must be 9:30 AM or earlier");
+    if (!time) {
+        alert("❌ Please select arrival time");
         return;
     }
 
@@ -185,7 +176,10 @@ function sendMail() {
         }
     )
     .then(() => {
-        alert("✅ Attendance email sent successfully");
+        alert(`✅ Attendance sent successfully for:\n\n${names}`);
+
+        // 🔄 Refresh page after success
+        location.reload();
     })
     .catch(error => {
         console.error(error);
