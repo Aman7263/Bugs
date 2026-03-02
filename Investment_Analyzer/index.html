@@ -220,15 +220,19 @@ function parseInvestmentAmount(input) {
 async function generateWithGemini(prompt) {
   const response = await fetch('/gemini-proxy', {
     method: 'POST',
-    headers: { "Content-Type": "application/json" },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ prompt })
   });
 
   const data = await response.json();
+
   const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
   const cleaned = text.replace(/```json|```/g, "").trim();
   const start = cleaned.indexOf("{");
   const end = cleaned.lastIndexOf("}");
+
+  if (start === -1 || end === -1) throw new Error("Invalid JSON response from Gemini proxy");
+
   return JSON.parse(cleaned.substring(start, end + 1));
 }
 
