@@ -188,7 +188,6 @@ const styles = StyleSheet.create({
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 12,
     width: 290,
     justifyContent: 'center',
     marginBottom: 24,
@@ -205,6 +204,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     shadowOffset: { width: 0, height: 1 },
+    margin: 5,
   },
   cardClosed: {
     backgroundColor: '#0d0d0d',

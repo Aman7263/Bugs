@@ -23,11 +23,26 @@ import CoinFlip from './games/CoinFlip';
 import SimonSays from './games/SimonSays';
 import MathRush from './games/MathRush';
 import ClickSpeed from './games/ClickSpeed';
+import ReactionTime from './games/ReactionTime';
+import WordScramble from './games/WordScramble';
+import WhackAMole from './games/WhackAMole';
+import SlidePuzzle from './games/SlidePuzzle';
+import HigherLower from './games/HigherLower';
+import StroopEffect from './games/StroopEffect';
+import TypeFast from './games/TypeFast';
+import CatchBall from './games/CatchBall';
+import SnakeGame from './games/SnakeGame';
+import NumberMemory from './games/NumberMemory';
+import QuickDraw from './games/QuickDraw';
+import OddOneOut from './games/OddOneOut';
+import ScratchCard from './games/ScratchCard';
+import PatternLock from './games/PatternLock';
+import ColorMixer from './games/ColorMixer';
 
 const { width } = Dimensions.get('window');
 const screenWidth = Dimensions.get('window').width;
-// 4-Column Layout: screenWidth - 36px (horizontal padding 18*2) - 36px (three 12px gaps)
-const cardWidth = (screenWidth - 36 - 36) / 4;
+// 4-Column Layout: screenWidth - 36px (horizontal padding 18*2) - 48px (four 12px margin spaces)
+const cardWidth = (screenWidth - 36 - 48) / 4;
 
 const SECTIONS = [
   {
@@ -344,6 +359,336 @@ const MobileScreensHome = () => {
     );
   }
 
+  if (activePage === 'reactiontime') {
+    return (
+      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
+        <View style={styles.pageTopBar}>
+          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
+            <Text style={styles.backArrow}>←</Text>
+            <Text style={styles.backLabel}>Back</Text>
+          </TouchableOpacity>
+          <View style={styles.pageTagRow}>
+            <View style={[styles.liveTag, { backgroundColor: '#e63946' }]}>
+              <Text style={styles.liveTagText}>GAMES</Text>
+            </View>
+            <Text style={styles.pageTopCategory}>REACTION TIME</Text>
+          </View>
+        </View>
+        <Text style={styles.pageHeadline}>Reaction Time</Text>
+        <View style={styles.dividerFull} />
+        <ReactionTime />
+      </Animated.View>
+    );
+  }
+
+  if (activePage === 'wordscramble') {
+    return (
+      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
+        <View style={styles.pageTopBar}>
+          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
+            <Text style={styles.backArrow}>←</Text>
+            <Text style={styles.backLabel}>Back</Text>
+          </TouchableOpacity>
+          <View style={styles.pageTagRow}>
+            <View style={[styles.liveTag, { backgroundColor: '#3f37c9' }]}>
+              <Text style={styles.liveTagText}>GAMES</Text>
+            </View>
+            <Text style={styles.pageTopCategory}>WORD SCRAMBLE</Text>
+          </View>
+        </View>
+        <Text style={styles.pageHeadline}>Word Scramble</Text>
+        <View style={styles.dividerFull} />
+        <WordScramble />
+      </Animated.View>
+    );
+  }
+
+  if (activePage === 'whackamole') {
+    return (
+      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
+        <View style={styles.pageTopBar}>
+          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
+            <Text style={styles.backArrow}>←</Text>
+            <Text style={styles.backLabel}>Back</Text>
+          </TouchableOpacity>
+          <View style={styles.pageTagRow}>
+            <View style={[styles.liveTag, { backgroundColor: '#f4a261' }]}>
+              <Text style={styles.liveTagText}>GAMES</Text>
+            </View>
+            <Text style={styles.pageTopCategory}>WHACK-A-MOLE</Text>
+          </View>
+        </View>
+        <Text style={styles.pageHeadline}>Whack-A-Mole</Text>
+        <View style={styles.dividerFull} />
+        <WhackAMole />
+      </Animated.View>
+    );
+  }
+
+  if (activePage === 'slidepuzzle') {
+    return (
+      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
+        <View style={styles.pageTopBar}>
+          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
+            <Text style={styles.backArrow}>←</Text>
+            <Text style={styles.backLabel}>Back</Text>
+          </TouchableOpacity>
+          <View style={styles.pageTagRow}>
+            <View style={[styles.liveTag, { backgroundColor: '#4361ee' }]}>
+              <Text style={styles.liveTagText}>GAMES</Text>
+            </View>
+            <Text style={styles.pageTopCategory}>SLIDE PUZZLE</Text>
+          </View>
+        </View>
+        <Text style={styles.pageHeadline}>Slide Puzzle</Text>
+        <View style={styles.dividerFull} />
+        <SlidePuzzle />
+      </Animated.View>
+    );
+  }
+
+  if (activePage === 'higherlower') {
+    return (
+      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
+        <View style={styles.pageTopBar}>
+          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
+            <Text style={styles.backArrow}>←</Text>
+            <Text style={styles.backLabel}>Back</Text>
+          </TouchableOpacity>
+          <View style={styles.pageTagRow}>
+            <View style={[styles.liveTag, { backgroundColor: '#7209b7' }]}>
+              <Text style={styles.liveTagText}>GAMES</Text>
+            </View>
+            <Text style={styles.pageTopCategory}>HIGHER OR LOWER</Text>
+          </View>
+        </View>
+        <Text style={styles.pageHeadline}>Higher or Lower</Text>
+        <View style={styles.dividerFull} />
+        <HigherLower />
+      </Animated.View>
+    );
+  }
+
+  if (activePage === 'stroopeffect') {
+    return (
+      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
+        <View style={styles.pageTopBar}>
+          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
+            <Text style={styles.backArrow}>←</Text>
+            <Text style={styles.backLabel}>Back</Text>
+          </TouchableOpacity>
+          <View style={styles.pageTagRow}>
+            <View style={[styles.liveTag, { backgroundColor: '#2a9d8f' }]}>
+              <Text style={styles.liveTagText}>GAMES</Text>
+            </View>
+            <Text style={styles.pageTopCategory}>STROOP EFFECT</Text>
+          </View>
+        </View>
+        <Text style={styles.pageHeadline}>Stroop Effect</Text>
+        <View style={styles.dividerFull} />
+        <StroopEffect />
+      </Animated.View>
+    );
+  }
+
+  if (activePage === 'typefast') {
+    return (
+      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
+        <View style={styles.pageTopBar}>
+          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
+            <Text style={styles.backArrow}>←</Text>
+            <Text style={styles.backLabel}>Back</Text>
+          </TouchableOpacity>
+          <View style={styles.pageTagRow}>
+            <View style={[styles.liveTag, { backgroundColor: '#2b2d42' }]}>
+              <Text style={styles.liveTagText}>GAMES</Text>
+            </View>
+            <Text style={styles.pageTopCategory}>TYPE FAST</Text>
+          </View>
+        </View>
+        <Text style={styles.pageHeadline}>Type Fast</Text>
+        <View style={styles.dividerFull} />
+        <TypeFast />
+      </Animated.View>
+    );
+  }
+
+  if (activePage === 'catchball') {
+    return (
+      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
+        <View style={styles.pageTopBar}>
+          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
+            <Text style={styles.backArrow}>←</Text>
+            <Text style={styles.backLabel}>Back</Text>
+          </TouchableOpacity>
+          <View style={styles.pageTagRow}>
+            <View style={[styles.liveTag, { backgroundColor: '#8d99ae' }]}>
+              <Text style={styles.liveTagText}>GAMES</Text>
+            </View>
+            <Text style={styles.pageTopCategory}>CATCH THE BALL</Text>
+          </View>
+        </View>
+        <Text style={styles.pageHeadline}>Catch the Ball</Text>
+        <View style={styles.dividerFull} />
+        <CatchBall />
+      </Animated.View>
+    );
+  }
+
+  if (activePage === 'snakegame') {
+    return (
+      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
+        <View style={styles.pageTopBar}>
+          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
+            <Text style={styles.backArrow}>←</Text>
+            <Text style={styles.backLabel}>Back</Text>
+          </TouchableOpacity>
+          <View style={styles.pageTagRow}>
+            <View style={[styles.liveTag, { backgroundColor: '#e63946' }]}>
+              <Text style={styles.liveTagText}>GAMES</Text>
+            </View>
+            <Text style={styles.pageTopCategory}>RETRO SNAKE</Text>
+          </View>
+        </View>
+        <Text style={styles.pageHeadline}>Retro Snake</Text>
+        <View style={styles.dividerFull} />
+        <SnakeGame />
+      </Animated.View>
+    );
+  }
+
+  if (activePage === 'numbermemory') {
+    return (
+      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
+        <View style={styles.pageTopBar}>
+          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
+            <Text style={styles.backArrow}>←</Text>
+            <Text style={styles.backLabel}>Back</Text>
+          </TouchableOpacity>
+          <View style={styles.pageTagRow}>
+            <View style={[styles.liveTag, { backgroundColor: '#3f37c9' }]}>
+              <Text style={styles.liveTagText}>GAMES</Text>
+            </View>
+            <Text style={styles.pageTopCategory}>NUMBER MEMORY</Text>
+          </View>
+        </View>
+        <Text style={styles.pageHeadline}>Number Memory</Text>
+        <View style={styles.dividerFull} />
+        <NumberMemory />
+      </Animated.View>
+    );
+  }
+
+  if (activePage === 'quickdraw') {
+    return (
+      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
+        <View style={styles.pageTopBar}>
+          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
+            <Text style={styles.backArrow}>←</Text>
+            <Text style={styles.backLabel}>Back</Text>
+          </TouchableOpacity>
+          <View style={styles.pageTagRow}>
+            <View style={[styles.liveTag, { backgroundColor: '#f4a261' }]}>
+              <Text style={styles.liveTagText}>GAMES</Text>
+            </View>
+            <Text style={styles.pageTopCategory}>QUICK DRAW</Text>
+          </View>
+        </View>
+        <Text style={styles.pageHeadline}>Quick Pixel Draw</Text>
+        <View style={styles.dividerFull} />
+        <QuickDraw />
+      </Animated.View>
+    );
+  }
+
+  if (activePage === 'oddoneout') {
+    return (
+      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
+        <View style={styles.pageTopBar}>
+          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
+            <Text style={styles.backArrow}>←</Text>
+            <Text style={styles.backLabel}>Back</Text>
+          </TouchableOpacity>
+          <View style={styles.pageTagRow}>
+            <View style={[styles.liveTag, { backgroundColor: '#2a9d8f' }]}>
+              <Text style={styles.liveTagText}>GAMES</Text>
+            </View>
+            <Text style={styles.pageTopCategory}>ODD ONE OUT</Text>
+          </View>
+        </View>
+        <Text style={styles.pageHeadline}>Odd One Out</Text>
+        <View style={styles.dividerFull} />
+        <OddOneOut />
+      </Animated.View>
+    );
+  }
+
+  if (activePage === 'scratchcard') {
+    return (
+      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
+        <View style={styles.pageTopBar}>
+          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
+            <Text style={styles.backArrow}>←</Text>
+            <Text style={styles.backLabel}>Back</Text>
+          </TouchableOpacity>
+          <View style={styles.pageTagRow}>
+            <View style={[styles.liveTag, { backgroundColor: '#7209b7' }]}>
+              <Text style={styles.liveTagText}>GAMES</Text>
+            </View>
+            <Text style={styles.pageTopCategory}>SCRATCH CARD</Text>
+          </View>
+        </View>
+        <Text style={styles.pageHeadline}>Scratch & Win</Text>
+        <View style={styles.dividerFull} />
+        <ScratchCard />
+      </Animated.View>
+    );
+  }
+
+  if (activePage === 'patternlock') {
+    return (
+      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
+        <View style={styles.pageTopBar}>
+          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
+            <Text style={styles.backArrow}>←</Text>
+            <Text style={styles.backLabel}>Back</Text>
+          </TouchableOpacity>
+          <View style={styles.pageTagRow}>
+            <View style={[styles.liveTag, { backgroundColor: '#4361ee' }]}>
+              <Text style={styles.liveTagText}>GAMES</Text>
+            </View>
+            <Text style={styles.pageTopCategory}>PATTERN LOCK</Text>
+          </View>
+        </View>
+        <Text style={styles.pageHeadline}>Pattern Lock Memory</Text>
+        <View style={styles.dividerFull} />
+        <PatternLock />
+      </Animated.View>
+    );
+  }
+
+  if (activePage === 'colormixer') {
+    return (
+      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
+        <View style={styles.pageTopBar}>
+          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
+            <Text style={styles.backArrow}>←</Text>
+            <Text style={styles.backLabel}>Back</Text>
+          </TouchableOpacity>
+          <View style={styles.pageTagRow}>
+            <View style={[styles.liveTag, { backgroundColor: '#2b2d42' }]}>
+              <Text style={styles.liveTagText}>GAMES</Text>
+            </View>
+            <Text style={styles.pageTopCategory}>COLOR MIXER</Text>
+          </View>
+        </View>
+        <Text style={styles.pageHeadline}>Color Mixer</Text>
+        <View style={styles.dividerFull} />
+        <ColorMixer />
+      </Animated.View>
+    );
+  }
+
   // HOME FEED
   return (
     <ScrollView style={styles.feed} contentContainerStyle={styles.feedContent}>
@@ -502,6 +847,156 @@ const MobileScreensHome = () => {
           >
             <Text style={styles.gameGridIcon}>⚡</Text>
             <Text style={styles.gameGridTitle} numberOfLines={1}>Click Speed</Text>
+          </TouchableOpacity>
+
+          {/* Game 11: Reaction Time */}
+          <TouchableOpacity
+            style={[styles.gameGridCard, { width: cardWidth }]}
+            onPress={() => openPage('reactiontime')}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.gameGridIcon}>🚦</Text>
+            <Text style={styles.gameGridTitle} numberOfLines={1}>Reflex Test</Text>
+          </TouchableOpacity>
+
+          {/* Game 12: Word Scramble */}
+          <TouchableOpacity
+            style={[styles.gameGridCard, { width: cardWidth }]}
+            onPress={() => openPage('wordscramble')}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.gameGridIcon}>🔤</Text>
+            <Text style={styles.gameGridTitle} numberOfLines={1}>Scramble</Text>
+          </TouchableOpacity>
+
+          {/* Game 13: WhackAMole */}
+          <TouchableOpacity
+            style={[styles.gameGridCard, { width: cardWidth }]}
+            onPress={() => openPage('whackamole')}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.gameGridIcon}>🐹</Text>
+            <Text style={styles.gameGridTitle} numberOfLines={1}>Whack Mole</Text>
+          </TouchableOpacity>
+
+          {/* Game 14: Slide Puzzle */}
+          <TouchableOpacity
+            style={[styles.gameGridCard, { width: cardWidth }]}
+            onPress={() => openPage('slidepuzzle')}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.gameGridIcon}>🧩</Text>
+            <Text style={styles.gameGridTitle} numberOfLines={1}>Slide 8</Text>
+          </TouchableOpacity>
+
+          {/* Game 15: Higher Lower */}
+          <TouchableOpacity
+            style={[styles.gameGridCard, { width: cardWidth }]}
+            onPress={() => openPage('higherlower')}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.gameGridIcon}>🃏</Text>
+            <Text style={styles.gameGridTitle} numberOfLines={1}>Hi-Lo Card</Text>
+          </TouchableOpacity>
+
+          {/* Game 16: Stroop Effect */}
+          <TouchableOpacity
+            style={[styles.gameGridCard, { width: cardWidth }]}
+            onPress={() => openPage('stroopeffect')}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.gameGridIcon}>🎨</Text>
+            <Text style={styles.gameGridTitle} numberOfLines={1}>Stroop Color</Text>
+          </TouchableOpacity>
+
+          {/* Game 17: Type Fast */}
+          <TouchableOpacity
+            style={[styles.gameGridCard, { width: cardWidth }]}
+            onPress={() => openPage('typefast')}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.gameGridIcon}>⌨️</Text>
+            <Text style={styles.gameGridTitle} numberOfLines={1}>Type Fast</Text>
+          </TouchableOpacity>
+
+          {/* Game 18: Catch Ball */}
+          <TouchableOpacity
+            style={[styles.gameGridCard, { width: cardWidth }]}
+            onPress={() => openPage('catchball')}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.gameGridIcon}>🥎</Text>
+            <Text style={styles.gameGridTitle} numberOfLines={1}>Catch Ball</Text>
+          </TouchableOpacity>
+
+          {/* Game 19: Snake */}
+          <TouchableOpacity
+            style={[styles.gameGridCard, { width: cardWidth }]}
+            onPress={() => openPage('snakegame')}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.gameGridIcon}>🐍</Text>
+            <Text style={styles.gameGridTitle} numberOfLines={1}>Retro Snake</Text>
+          </TouchableOpacity>
+
+          {/* Game 20: Number Memory */}
+          <TouchableOpacity
+            style={[styles.gameGridCard, { width: cardWidth }]}
+            onPress={() => openPage('numbermemory')}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.gameGridIcon}>📟</Text>
+            <Text style={styles.gameGridTitle} numberOfLines={1}>Num Memory</Text>
+          </TouchableOpacity>
+
+          {/* Game 21: Quick Draw */}
+          <TouchableOpacity
+            style={[styles.gameGridCard, { width: cardWidth }]}
+            onPress={() => openPage('quickdraw')}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.gameGridIcon}>🖌️</Text>
+            <Text style={styles.gameGridTitle} numberOfLines={1}>Quick Draw</Text>
+          </TouchableOpacity>
+
+          {/* Game 22: Odd One Out */}
+          <TouchableOpacity
+            style={[styles.gameGridCard, { width: cardWidth }]}
+            onPress={() => openPage('oddoneout')}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.gameGridIcon}>🔍</Text>
+            <Text style={styles.gameGridTitle} numberOfLines={1}>Odd One</Text>
+          </TouchableOpacity>
+
+          {/* Game 23: Scratch Card */}
+          <TouchableOpacity
+            style={[styles.gameGridCard, { width: cardWidth }]}
+            onPress={() => openPage('scratchcard')}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.gameGridIcon}>🎟️</Text>
+            <Text style={styles.gameGridTitle} numberOfLines={1}>Scratch Card</Text>
+          </TouchableOpacity>
+
+          {/* Game 24: Pattern Lock */}
+          <TouchableOpacity
+            style={[styles.gameGridCard, { width: cardWidth }]}
+            onPress={() => openPage('patternlock')}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.gameGridIcon}>🔐</Text>
+            <Text style={styles.gameGridTitle} numberOfLines={1}>Pattern Lock</Text>
+          </TouchableOpacity>
+
+          {/* Game 25: Color Mixer */}
+          <TouchableOpacity
+            style={[styles.gameGridCard, { width: cardWidth }]}
+            onPress={() => openPage('colormixer')}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.gameGridIcon}>🎨</Text>
+            <Text style={styles.gameGridTitle} numberOfLines={1}>Color Mixer</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -844,7 +1339,6 @@ const styles = StyleSheet.create({
   gamesGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 12,
     marginTop: 8,
   },
   gameGridCard: {
@@ -862,6 +1356,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     elevation: 1,
     minHeight: 85,
+    margin: 6,
   },
   gameGridIcon: {
     fontSize: 22,
