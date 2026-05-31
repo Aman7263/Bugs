@@ -10,8 +10,13 @@
   },
   "dependencies": {
     "expo": "~54.0.34",
+    "expo-battery": "~10.0.8",
+    "expo-cellular": "~8.0.8",
     "expo-contacts": "~15.0.11",
+    "expo-device": "~8.0.10",
     "expo-file-system": "~19.0.23",
+    "expo-location": "~19.0.8",
+    "expo-network": "~8.0.8",
     "expo-status-bar": "~3.0.9",
     "react": "19.1.0",
     "react-native": "0.81.5",

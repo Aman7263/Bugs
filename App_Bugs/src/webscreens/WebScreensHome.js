@@ -1,7 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, Keyboard } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { WebView } from 'react-native-webview';
+import * as Location from 'expo-location';
 
 const DEFAULT_URL = 'https://aman7263.github.io/Bugs/';
 
@@ -20,6 +21,16 @@ const WebScreensHome = () => {
   const [canGoBack, setCanGoBack] = useState(false);
   const searchInputRef = useRef(null);
   const webViewRef = useRef(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        await Location.requestForegroundPermissionsAsync();
+      } catch (err) {
+        console.warn('Error requesting location permission:', err);
+      }
+    })();
+  }, []);
 
   const goBack = () => {
     if (webViewRef.current && canGoBack) webViewRef.current.goBack();

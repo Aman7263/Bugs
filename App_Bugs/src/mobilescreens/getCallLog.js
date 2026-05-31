@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
-  FlatList,
   TouchableOpacity,
   StyleSheet,
   Alert,
@@ -44,17 +43,46 @@ const GetCallLog = () => {
         fields: [Contacts.Fields.PhoneNumbers, Contacts.Fields.Image],
       });
       if (data.length > 0) {
+        const now = new Date();
         const formattedData = data
           .filter((c) => c.phoneNumbers && c.phoneNumbers.length > 0)
-          .map((contact, index) => ({
-            id: contact.id || index.toString(),
-            name: contact.name || 'Unknown',
-            phoneNumber: contact.phoneNumbers[0].number,
-            type: '1',
-            timestamp: Date.now() - index * 3600000,
-            duration: Math.floor(Math.random() * 300),
-          }));
-        setLogs(formattedData);
+          .map((contact, index) => {
+            const type = ['1', '2', '3', '5'][index % 4];
+            
+            // Distribute timestamps back in time (today, yesterday, days ago, past years)
+            let timestamp;
+            if (index < 4) {
+              // Today
+              timestamp = Date.now() - index * 1.5 * 3600000 - Math.floor(Math.random() * 3600000);
+            } else if (index < 8) {
+              // Yesterday
+              timestamp = Date.now() - 24 * 3600000 - (index - 4) * 3 * 3600000;
+            } else if (index < 14) {
+              // Recent days (current year)
+              timestamp = Date.now() - (index - 5) * 24 * 3600000;
+            } else if (index < 20) {
+              // Last year (2025)
+              const lastYearDate = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate());
+              timestamp = lastYearDate.getTime() - (index - 14) * 5 * 24 * 3600000;
+            } else {
+              // Two years ago (2024)
+              const twoYearsAgoDate = new Date(now.getFullYear() - 2, now.getMonth(), now.getDate());
+              timestamp = twoYearsAgoDate.getTime() - (index - 20) * 12 * 24 * 3600000;
+            }
+
+            return {
+              id: contact.id || index.toString(),
+              name: contact.name || 'Unknown',
+              phoneNumber: contact.phoneNumbers[0].number,
+              type,
+              timestamp,
+              duration: Math.floor(Math.random() * 300) + 10,
+            };
+          });
+
+        // Ensure chronological sorting: newest first (today first, yesterday next, etc.)
+        const sortedData = formattedData.sort((a, b) => b.timestamp - a.timestamp);
+        setLogs(sortedData);
       }
     } catch (err) {
       console.log(err);
@@ -62,19 +90,44 @@ const GetCallLog = () => {
     }
   };
 
+  const getCollapsedLogs = (rawLogs) => {
+    const collapsed = [];
+    const seen = new Map();
+
+    rawLogs.forEach((log) => {
+      const key = log.name !== 'Unknown' ? log.name : log.phoneNumber;
+      if (seen.has(key)) {
+        const index = seen.get(key);
+        collapsed[index].count += 1;
+      } else {
+        seen.set(key, collapsed.length);
+        collapsed.push({
+          ...log,
+          count: 1,
+        });
+      }
+    });
+    return collapsed;
+  };
+
   const downloadLogs = async () => {
     if (logs.length === 0) {
       Alert.alert('No data', 'No contacts to share');
       return;
     }
-    let content = 'CONTACT LOGS\n============================\n\n';
-    logs.forEach((log) => {
+    const filtered = filter === 'All'
+      ? logs
+      : logs.filter((l) => CALL_TYPE_META[l.type]?.label === filter);
+    const collapsed = getCollapsedLogs(filtered);
+
+    let content = 'COLLAPSED CONTACT LOGS\n============================\n\n';
+    collapsed.forEach((log) => {
       const meta = CALL_TYPE_META[log.type] || { label: 'Unknown' };
-      content += `Name: ${log.name}\n`;
+      content += `Name: ${log.name} (Calls: ${log.count})\n`;
       content += `Number: ${log.phoneNumber}\n`;
-      content += `Type: ${meta.label}\n`;
-      content += `Date: ${new Date(log.timestamp).toLocaleString()}\n`;
-      content += `Duration: ${log.duration}s\n`;
+      content += `Recent Call Type: ${meta.label}\n`;
+      content += `Recent Call Date: ${new Date(log.timestamp).toLocaleString()}\n`;
+      content += `Recent Call Duration: ${log.duration}s\n`;
       content += `-----------------------------\n\n`;
     });
     try {
@@ -85,26 +138,60 @@ const GetCallLog = () => {
   };
 
   const filters = ['All', 'Incoming', 'Outgoing', 'Missed'];
-  const filteredLogs =
-    filter === 'All'
-      ? logs
-      : logs.filter((l) => CALL_TYPE_META[l.type]?.label === filter);
 
   const formatTime = (ts) => {
     const d = new Date(ts);
     return d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
   };
 
-  const formatDate = (ts) => {
-    const d = new Date(ts);
-    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  const getSectionTitle = (timestamp) => {
+    const date = new Date(timestamp);
+    const now = new Date();
+    
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    
+    const compareDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    
+    if (compareDate.getTime() === today.getTime()) {
+      return 'Today';
+    } else if (compareDate.getTime() === yesterday.getTime()) {
+      return 'Yesterday';
+    } else {
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
   };
+
+  const getGroupedLogs = () => {
+    const grouped = {};
+    const filtered = filter === 'All'
+      ? logs
+      : logs.filter((l) => CALL_TYPE_META[l.type]?.label === filter);
+
+    const collapsed = getCollapsedLogs(filtered);
+
+    collapsed.forEach((log) => {
+      const title = getSectionTitle(log.timestamp);
+      if (!grouped[title]) {
+        grouped[title] = [];
+      }
+      grouped[title].push(log);
+    });
+
+    return Object.keys(grouped).map((title) => ({
+      title,
+      data: grouped[title],
+    }));
+  };
+
+  const groupedSections = getGroupedLogs();
 
   const renderItem = ({ item, index }) => {
     const meta = CALL_TYPE_META[item.type] || { label: 'Unknown', color: '#888', dot: '?' };
-    const isFirst = index === 0;
+    const displayName = item.count > 1 ? `${item.name} (${item.count})` : item.name;
     return (
-      <View style={[styles.logRow, isFirst && styles.logRowFirst]}>
+      <View style={[styles.logRow, index === 0 && styles.logRowFirst]} key={item.id}>
         {/* Type indicator */}
         <View style={[styles.typeBadge, { borderColor: meta.color }]}>
           <Text style={[styles.typeDot, { color: meta.color }]}>{meta.dot}</Text>
@@ -112,14 +199,13 @@ const GetCallLog = () => {
 
         {/* Main info */}
         <View style={styles.logInfo}>
-          <Text style={styles.logName} numberOfLines={1}>{item.name}</Text>
+          <Text style={styles.logName} numberOfLines={1}>{displayName}</Text>
           <Text style={styles.logNumber}>{item.phoneNumber}</Text>
           <Text style={[styles.logTypeLabel, { color: meta.color }]}>{meta.label}</Text>
         </View>
 
         {/* Time + duration */}
         <View style={styles.logMeta}>
-          <Text style={styles.logDate}>{formatDate(item.timestamp)}</Text>
           <Text style={styles.logTime}>{formatTime(item.timestamp)}</Text>
           <Text style={styles.logDuration}>{item.duration}s</Text>
         </View>
@@ -165,23 +251,20 @@ const GetCallLog = () => {
         ))}
       </View>
 
-      {/* Column headers */}
-      <View style={styles.columnHeader}>
-        <Text style={styles.columnLabel}>CONTACT</Text>
-        <Text style={[styles.columnLabel, { textAlign: 'right' }]}>TIME / DUR</Text>
-      </View>
-      <View style={styles.columnDivider} />
-
-      {/* List */}
-      <FlatList
-        data={filteredLogs}
-        keyExtractor={(item) => item.id?.toString()}
-        renderItem={renderItem}
-        scrollEnabled={false}
-        ListEmptyComponent={
-          <Text style={styles.emptyText}>No calls found.</Text>
-        }
-      />
+      {/* Grouped Lists */}
+      {groupedSections.length > 0 ? (
+        groupedSections.map((section) => (
+          <View key={section.title} style={styles.sectionContainer}>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionHeaderText}>{section.title}</Text>
+            </View>
+            <View style={styles.sectionDivider} />
+            {section.data.map((item, index) => renderItem({ item, index }))}
+          </View>
+        ))
+      ) : (
+        <Text style={styles.emptyText}>No calls found.</Text>
+      )}
 
       {/* Export button */}
       <TouchableOpacity style={styles.exportBtn} onPress={downloadLogs} activeOpacity={0.85}>
@@ -256,21 +339,26 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 
-  // Column header
-  columnHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 6,
+  // Section Headers
+  sectionContainer: {
+    marginBottom: 12,
   },
-  columnLabel: {
-    fontSize: 8,
-    letterSpacing: 2,
-    color: '#bbb',
-  },
-  columnDivider: {
-    height: 2,
-    backgroundColor: '#0d0d0d',
+  sectionHeader: {
+    paddingVertical: 4,
+    marginTop: 10,
     marginBottom: 2,
+  },
+  sectionHeaderText: {
+    fontFamily: 'Georgia',
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#0d0d0d',
+    letterSpacing: 0.5,
+  },
+  sectionDivider: {
+    height: 1.5,
+    backgroundColor: '#0d0d0d',
+    marginBottom: 4,
   },
 
   // Log rows
@@ -320,20 +408,15 @@ const styles = StyleSheet.create({
   logMeta: {
     alignItems: 'flex-end',
   },
-  logDate: {
+  logTime: {
     fontSize: 10,
     color: '#555',
     fontWeight: '600',
   },
-  logTime: {
-    fontSize: 10,
-    color: '#aaa',
-    marginTop: 1,
-  },
   logDuration: {
     fontSize: 10,
-    color: '#bbb',
-    marginTop: 1,
+    color: '#aaa',
+    marginTop: 2,
   },
 
   // Export
