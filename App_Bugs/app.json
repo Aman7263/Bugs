@@ -25,7 +25,12 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.verseyanosorganization.Bugs"
+      "package": "com.verseyanosorganization.Bugs",
+      "permissions": [
+        "READ_CALL_LOG",
+        "WRITE_CALL_LOG",
+        "READ_CONTACTS"
+      ]
     },
     "web": {
       "favicon": "./assets/logo.png"
