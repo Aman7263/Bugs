@@ -104,49 +104,46 @@ const ColorMixer = () => {
                 {/* Red Slider */}
                 <View style={styles.sliderGroup}>
                   <Text style={styles.sliderLabel}>RED: {userColor.r}</Text>
-                  <TouchableOpacity
-                    activeOpacity={1}
+                  <View
                     style={styles.sliderTrackContainer}
                     onTouchStart={(e) => handleSliderTouch('r', e)}
                     onTouchMove={(e) => handleSliderTouch('r', e)}
                   >
-                    <View style={styles.sliderTrack}>
+                    <View style={styles.sliderTrack} pointerEvents="none">
                       <View style={[styles.sliderFill, { width: (userColor.r / 255) * SLIDER_WIDTH, backgroundColor: '#e63946' }]} />
                       <View style={[styles.sliderHandle, { left: (userColor.r / 255) * (SLIDER_WIDTH - 14) }]} />
                     </View>
-                  </TouchableOpacity>
+                  </View>
                 </View>
 
                 {/* Green Slider */}
                 <View style={styles.sliderGroup}>
                   <Text style={styles.sliderLabel}>GREEN: {userColor.g}</Text>
-                  <TouchableOpacity
-                    activeOpacity={1}
+                  <View
                     style={styles.sliderTrackContainer}
                     onTouchStart={(e) => handleSliderTouch('g', e)}
                     onTouchMove={(e) => handleSliderTouch('g', e)}
                   >
-                    <View style={styles.sliderTrack}>
+                    <View style={styles.sliderTrack} pointerEvents="none">
                       <View style={[styles.sliderFill, { width: (userColor.g / 255) * SLIDER_WIDTH, backgroundColor: '#2a9d8f' }]} />
                       <View style={[styles.sliderHandle, { left: (userColor.g / 255) * (SLIDER_WIDTH - 14) }]} />
                     </View>
-                  </TouchableOpacity>
+                  </View>
                 </View>
 
                 {/* Blue Slider */}
                 <View style={styles.sliderGroup}>
                   <Text style={styles.sliderLabel}>BLUE: {userColor.b}</Text>
-                  <TouchableOpacity
-                    activeOpacity={1}
+                  <View
                     style={styles.sliderTrackContainer}
                     onTouchStart={(e) => handleSliderTouch('b', e)}
                     onTouchMove={(e) => handleSliderTouch('b', e)}
                   >
-                    <View style={styles.sliderTrack}>
+                    <View style={styles.sliderTrack} pointerEvents="none">
                       <View style={[styles.sliderFill, { width: (userColor.b / 255) * SLIDER_WIDTH, backgroundColor: '#3f37c9' }]} />
                       <View style={[styles.sliderHandle, { left: (userColor.b / 255) * (SLIDER_WIDTH - 14) }]} />
                     </View>
-                  </TouchableOpacity>
+                  </View>
                 </View>
 
                 <TouchableOpacity style={styles.btnAction} onPress={checkMatch}>

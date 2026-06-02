@@ -221,8 +221,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   grid: {
-    width: 220,
-    height: 220,
+    width: 224,
+    height: 224,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',

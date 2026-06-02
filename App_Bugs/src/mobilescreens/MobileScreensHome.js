@@ -33,11 +33,39 @@ import TypeFast from './games/TypeFast';
 import CatchBall from './games/CatchBall';
 import SnakeGame from './games/SnakeGame';
 import NumberMemory from './games/NumberMemory';
-import QuickDraw from './games/QuickDraw';
+import Game2048 from './games/Game2048';
 import OddOneOut from './games/OddOneOut';
 import ScratchCard from './games/ScratchCard';
 import PatternLock from './games/PatternLock';
 import ColorMixer from './games/ColorMixer';
+
+const GAMES_CONFIG = {
+  tictactoe: { name: 'Tic Tac Toe', component: TicTacToe, color: '#e63946', category: 'TIC TAC TOE', hint: 'Get three in a row to win! Play against the computer.' },
+  memorymatch: { name: 'Memory Match', component: MemoryMatch, color: '#3f37c9', category: 'MEMORY MATCH', hint: 'Flip cards and find matching pairs with the fewest moves.' },
+  rps: { name: 'R.P.S. Duel', component: RockPaperScissors, color: '#f4a261', category: 'ROCK PAPER SCISSORS', hint: 'Choose Rock, Paper, or Scissors and defeat your opponent.' },
+  numguess: { name: 'Guess The Number', component: NumberGuess, color: '#4361ee', category: 'NUMBER GUESS', hint: 'Guess the hidden number in the range. Pay attention to high/low hints.' },
+  tapspeed: { name: 'Whack-A-Dot Speed', component: TapSpeed, color: '#7209b7', category: 'TAP SPEED', hint: 'Tap as many green dots as possible before the time runs out.' },
+  diceroller: { name: 'Dice Roller', component: DiceRoller, color: '#f4a261', category: 'DICE ROLLER', hint: 'Tap to roll the dice and check your luck.' },
+  coinflip: { name: 'Coin Flipper', component: CoinFlip, color: '#e76f51', category: 'COIN FLIP', hint: 'Flip the coin and predict heads or tails.' },
+  simonsays: { name: 'Simon Says Recall', component: SimonSays, color: '#2a9d8f', category: 'SIMON SAYS', hint: 'Memorize and repeat the flashing sequence of colored buttons.' },
+  mathrush: { name: 'Math Speed Rush', component: MathRush, color: '#2b2d42', category: 'MATH RUSH', hint: 'Solve as many arithmetic equations as you can within the time limit.' },
+  clickspeed: { name: 'CPS Click Speed', component: ClickSpeed, color: '#8d99ae', category: 'CLICK SPEED', hint: 'Click the tap button as fast as you can to measure your CPS.' },
+  reactiontime: { name: 'Reaction Time', component: ReactionTime, color: '#e63946', category: 'REACTION TIME', hint: 'Wait for green and tap as fast as possible to test your reflexes.' },
+  wordscramble: { name: 'Word Scramble', component: WordScramble, color: '#3f37c9', category: 'WORD SCRAMBLE', hint: 'Unscramble the letters to guess the correct word.' },
+  whackamole: { name: 'Whack-A-Mole', component: WhackAMole, color: '#f4a261', category: 'WHACK-A-MOLE', hint: 'Whack the moles as they pop up to score points.' },
+  slidepuzzle: { name: 'Slide Puzzle', component: SlidePuzzle, color: '#4361ee', category: 'SLIDE PUZZLE', hint: 'Slide the tiles into numeric order 1-8 using the empty slot.' },
+  higherlower: { name: 'Higher or Lower', component: HigherLower, color: '#7209b7', category: 'HIGHER OR LOWER', hint: 'Predict if the next card is higher or lower than the current one.' },
+  stroopeffect: { name: 'Stroop Effect', component: StroopEffect, color: '#2a9d8f', category: 'STROOP EFFECT', hint: 'Select the color of the text, ignoring the word\'s actual meaning.' },
+  typefast: { name: 'Type Fast', component: TypeFast, color: '#2b2d42', category: 'TYPE FAST', hint: 'Type the given sentences as quickly and accurately as possible.' },
+  catchball: { name: 'Catch the Ball', component: CatchBall, color: '#8d99ae', category: 'CATCH THE BALL', hint: 'Tilt or tap to move the basket and catch falling balls.' },
+  snakegame: { name: 'Retro Snake', component: SnakeGame, color: '#e63946', category: 'RETRO SNAKE', hint: 'Eat food to grow your snake. Avoid hitting walls and your own tail.' },
+  numbermemory: { name: 'Number Memory', component: NumberMemory, color: '#3f37c9', category: 'NUMBER MEMORY', hint: 'Memorize the shown digits and type them back correctly.' },
+  game2048: { name: '2048 Puzzle', component: Game2048, color: '#edc22e', category: '2048 PUZZLE', hint: 'Merge adjacent identical numbers by swiping or using buttons to reach the 2048 tile!' },
+  oddoneout: { name: 'Odd One Out', component: OddOneOut, color: '#2a9d8f', category: 'ODD ONE OUT', hint: 'Find the different grid element that stands out from the rest.' },
+  scratchcard: { name: 'Scratch & Win', component: ScratchCard, color: '#7209b7', category: 'SCRATCH CARD', hint: 'Scratch the card surface to reveal matching prize symbols.' },
+  patternlock: { name: 'Pattern Lock Memory', component: PatternLock, color: '#4361ee', category: 'PATTERN LOCK', hint: 'Memorize the pattern and trace it correctly on the grid.' },
+  colormixer: { name: 'Color Mixer', component: ColorMixer, color: '#2b2d42', category: 'COLOR MIXER', hint: 'Adjust the Red, Green, and Blue sliders to match the target color.' }
+};
 
 const { width } = Dimensions.get('window');
 const screenWidth = Dimensions.get('window').width;
@@ -139,7 +167,9 @@ const MobileScreensHome = () => {
     );
   }
 
-  if (activePage === 'tictactoe') {
+  const game = GAMES_CONFIG[activePage];
+  if (game) {
+    const GameComponent = game.component;
     return (
       <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
         <View style={styles.pageTopBar}>
@@ -148,543 +178,20 @@ const MobileScreensHome = () => {
             <Text style={styles.backLabel}>Back</Text>
           </TouchableOpacity>
           <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#e63946' }]}>
+            <View style={[styles.liveTag, { backgroundColor: game.color }]}>
               <Text style={styles.liveTagText}>GAMES</Text>
             </View>
-            <Text style={styles.pageTopCategory}>TIC TAC TOE</Text>
+            <Text style={styles.pageTopCategory}>{game.category}</Text>
           </View>
         </View>
-        <Text style={styles.pageHeadline}>Tic Tac Toe</Text>
+        <Text style={styles.pageHeadline}>{game.name}</Text>
         <View style={styles.dividerFull} />
-        <TicTacToe />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'memorymatch') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#3f37c9' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>MEMORY MATCH</Text>
+        {game.hint ? (
+          <View style={styles.hintContainer}>
+            <Text style={styles.hintText}>💡 Hint: {game.hint}</Text>
           </View>
-        </View>
-        <Text style={styles.pageHeadline}>Memory Match</Text>
-        <View style={styles.dividerFull} />
-        <MemoryMatch />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'rps') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#f4a261' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>ROCK PAPER SCISSORS</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>R.P.S. Duel</Text>
-        <View style={styles.dividerFull} />
-        <RockPaperScissors />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'numguess') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#4361ee' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>NUMBER GUESS</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Guess The Number</Text>
-        <View style={styles.dividerFull} />
-        <NumberGuess />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'tapspeed') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#7209b7' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>TAP SPEED</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Whack-A-Dot Speed</Text>
-        <View style={styles.dividerFull} />
-        <TapSpeed />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'diceroller') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#f4a261' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>DICE ROLLER</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Dice Roller</Text>
-        <View style={styles.dividerFull} />
-        <DiceRoller />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'coinflip') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#e76f51' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>COIN FLIP</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Coin Flipper</Text>
-        <View style={styles.dividerFull} />
-        <CoinFlip />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'simonsays') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#2a9d8f' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>SIMON SAYS</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Simon Says Recall</Text>
-        <View style={styles.dividerFull} />
-        <SimonSays />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'mathrush') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#2b2d42' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>MATH RUSH</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Math Speed Rush</Text>
-        <View style={styles.dividerFull} />
-        <MathRush />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'clickspeed') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#8d99ae' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>CLICK SPEED</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>CPS Click Speed</Text>
-        <View style={styles.dividerFull} />
-        <ClickSpeed />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'reactiontime') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#e63946' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>REACTION TIME</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Reaction Time</Text>
-        <View style={styles.dividerFull} />
-        <ReactionTime />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'wordscramble') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#3f37c9' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>WORD SCRAMBLE</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Word Scramble</Text>
-        <View style={styles.dividerFull} />
-        <WordScramble />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'whackamole') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#f4a261' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>WHACK-A-MOLE</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Whack-A-Mole</Text>
-        <View style={styles.dividerFull} />
-        <WhackAMole />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'slidepuzzle') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#4361ee' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>SLIDE PUZZLE</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Slide Puzzle</Text>
-        <View style={styles.dividerFull} />
-        <SlidePuzzle />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'higherlower') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#7209b7' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>HIGHER OR LOWER</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Higher or Lower</Text>
-        <View style={styles.dividerFull} />
-        <HigherLower />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'stroopeffect') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#2a9d8f' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>STROOP EFFECT</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Stroop Effect</Text>
-        <View style={styles.dividerFull} />
-        <StroopEffect />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'typefast') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#2b2d42' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>TYPE FAST</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Type Fast</Text>
-        <View style={styles.dividerFull} />
-        <TypeFast />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'catchball') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#8d99ae' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>CATCH THE BALL</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Catch the Ball</Text>
-        <View style={styles.dividerFull} />
-        <CatchBall />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'snakegame') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#e63946' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>RETRO SNAKE</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Retro Snake</Text>
-        <View style={styles.dividerFull} />
-        <SnakeGame />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'numbermemory') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#3f37c9' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>NUMBER MEMORY</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Number Memory</Text>
-        <View style={styles.dividerFull} />
-        <NumberMemory />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'quickdraw') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#f4a261' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>QUICK DRAW</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Quick Pixel Draw</Text>
-        <View style={styles.dividerFull} />
-        <QuickDraw />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'oddoneout') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#2a9d8f' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>ODD ONE OUT</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Odd One Out</Text>
-        <View style={styles.dividerFull} />
-        <OddOneOut />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'scratchcard') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#7209b7' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>SCRATCH CARD</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Scratch & Win</Text>
-        <View style={styles.dividerFull} />
-        <ScratchCard />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'patternlock') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#4361ee' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>PATTERN LOCK</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Pattern Lock Memory</Text>
-        <View style={styles.dividerFull} />
-        <PatternLock />
-      </Animated.View>
-    );
-  }
-
-  if (activePage === 'colormixer') {
-    return (
-      <Animated.View style={[styles.pageContainer, { transform: [{ translateY: slideAnim }] }]}>
-        <View style={styles.pageTopBar}>
-          <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-            <Text style={styles.backArrow}>←</Text>
-            <Text style={styles.backLabel}>Back</Text>
-          </TouchableOpacity>
-          <View style={styles.pageTagRow}>
-            <View style={[styles.liveTag, { backgroundColor: '#2b2d42' }]}>
-              <Text style={styles.liveTagText}>GAMES</Text>
-            </View>
-            <Text style={styles.pageTopCategory}>COLOR MIXER</Text>
-          </View>
-        </View>
-        <Text style={styles.pageHeadline}>Color Mixer</Text>
-        <View style={styles.dividerFull} />
-        <ColorMixer />
+        ) : null}
+        <GameComponent />
       </Animated.View>
     );
   }
@@ -949,14 +456,14 @@ const MobileScreensHome = () => {
             <Text style={styles.gameGridTitle} numberOfLines={1}>Num Memory</Text>
           </TouchableOpacity>
 
-          {/* Game 21: Quick Draw */}
+          {/* Game 21: 2048 */}
           <TouchableOpacity
             style={[styles.gameGridCard, { width: cardWidth }]}
-            onPress={() => openPage('quickdraw')}
+            onPress={() => openPage('game2048')}
             activeOpacity={0.8}
           >
-            <Text style={styles.gameGridIcon}>🖌️</Text>
-            <Text style={styles.gameGridTitle} numberOfLines={1}>Quick Draw</Text>
+            <Text style={styles.gameGridIcon}>🔢</Text>
+            <Text style={styles.gameGridTitle} numberOfLines={1}>2048</Text>
           </TouchableOpacity>
 
           {/* Game 22: Odd One Out */}
@@ -1368,5 +875,19 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#0d0d0d',
     textAlign: 'center',
+  },
+  hintContainer: {
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ebebeb',
+    borderRadius: 4,
+    padding: 10,
+    marginBottom: 14,
+  },
+  hintText: {
+    fontFamily: 'Georgia',
+    fontSize: 11.5,
+    color: '#555',
+    lineHeight: 16,
   },
 });
